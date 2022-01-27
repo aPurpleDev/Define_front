@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Row } from "react-bootstrap"
+import { Button, Container, Form, Row, Spinner } from "react-bootstrap"
 import { fetchDefinition } from "../Services/DefinitionService";
 
 export const DefinitionForm = () => {
@@ -8,6 +8,7 @@ export const DefinitionForm = () => {
   const [definition, setDefinition] = useState('');
 
   const wordInput = (event) => {
+    event.preventDefault();
     setWord(event.target.value);
   }
 
@@ -18,7 +19,7 @@ export const DefinitionForm = () => {
       JsonResult = JSON.stringify(JsonResult).replace(/[\[\]']+/g, '');
       setDefinition(JsonResult);
     };
-    fetchResult();
+      fetchResult();
   }, [word]);
 
     return <>
@@ -30,7 +31,7 @@ export const DefinitionForm = () => {
         </Row>
         <Form.Control className="form-control" type="string" 
         placeholder="Seeking knowledge? Write a word here" onChange={wordInput} />
-        <Button className="btn-lg top-buffer" variant="primary" type="submit">
+        <Button className="btn-lg top-buffer" variant="primary" type="submit" onClick={ (event) => event.preventDefault() }>
         Submit
        </Button>
       </Form.Group>
