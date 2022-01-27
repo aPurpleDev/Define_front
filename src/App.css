@@ -1,6 +1,4 @@
-.custom-title{
-  color: orange;
-}
+.top-buffer { margin-top:20px; }
 
 .App {
   text-align: center;

@@ -1,8 +1,9 @@
 import { DefinitionForm } from "../Components/DefinitionForm";
+import { DefinitionNavBar } from "../Components/DefineNavBar"
 
 export const Home = () => {
     return <>
-            <h1 className="text-center warning custom-title">DefineWithOxford</h1>
+            <DefinitionNavBar></DefinitionNavBar>
             <DefinitionForm></DefinitionForm>
            </>
 }

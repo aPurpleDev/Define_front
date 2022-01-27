@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap"
+import { fetchDefinition } from "../Services/DefinitionService";
 
 export const DefinitionForm = () => {
 
@@ -12,11 +13,10 @@ export const DefinitionForm = () => {
 
   useEffect( ()=> {
     const fetchResult = async()=>{
-      console.log('here');
       let result = await fetch(`http://localhost:3000/define/${word}`);
       let JsonResult = await result.json(); 
-      console.log(JsonResult);
-      setDefinition(JSON.stringify(JsonResult));
+      JsonResult = JSON.stringify(JsonResult).replace(/[\[\]']+/g, '');
+      setDefinition(JsonResult);
     };
     fetchResult();
   }, [word]);
@@ -24,18 +24,19 @@ export const DefinitionForm = () => {
     return <>
     <Container fluid>
       <Form>
-      <Form.Group className="col-md-12" controlId="formWordToDefine">
+      <h2 className="text-muted"><em>All the definitions you need</em></h2>
+      <Form.Group className="col-md-4 offset-4" controlId="formWordToDefine">
         <Row>
-        <Form.Label className="h2">Enter a word to define</Form.Label>
         </Row>
-        <Form.Control type="string" placeholder="Seeking knowledge? write here" onChange={wordInput} />
-        <Button variant="primary" type="submit">
+        <Form.Control className="form-control" type="string" 
+        placeholder="Seeking knowledge? Write a word here" onChange={wordInput} />
+        <Button className="btn-lg top-buffer" variant="primary" type="submit">
         Submit
-      </Button>
+       </Button>
       </Form.Group>
       </Form>
-      <h2 className="custom-title">Looking for {word ? word : '.. nothing yet'}</h2>
-      <h2 className="custom-title">{definition ? definition : null}</h2>
+      <small className="text-muted">Looking for the meaning of <b>{word ? word : '.. nothing yet'}</b></small>
+      <h2>{definition ? definition : null}</h2>
     </Container>
     </>
 }
