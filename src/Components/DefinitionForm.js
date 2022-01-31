@@ -1,26 +1,18 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form, Row, Spinner } from "react-bootstrap"
-import { fetchDefinition } from "../Services/DefinitionService";
+import { Button, Container, Form, Row } from "react-bootstrap"
+import _ from "lodash";
+import useFetchResult from "../Services/DefinitionService";
 
 export const DefinitionForm = () => {
 
   const [word, setWord] = useState('');
-  const [definition, setDefinition] = useState('');
+  const definition = useFetchResult(word);
 
   const wordInput = (event) => {
+
     event.preventDefault();
     setWord(event.target.value);
   }
-
-  useEffect( ()=> {
-    const fetchResult = async()=>{
-      let result = await fetch(`http://localhost:3000/define/${word}`);
-      let JsonResult = await result.json(); 
-      JsonResult = JSON.stringify(JsonResult).replace(/[\[\]']+/g, '');
-      setDefinition(JsonResult);
-    };
-      fetchResult();
-  }, [word]);
 
     return <>
     <Container fluid>
