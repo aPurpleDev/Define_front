@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap"
 import _ from "lodash";
-import useFetchResult from "../Services/DefinitionService";
+import useFetchResult from "../Hooks/DefinitionService";
 
 export const DefinitionForm = () => {
 
