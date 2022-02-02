@@ -15,6 +15,7 @@ const useFetchResult = (word) => {
   }, [word]);
 
   return definition;
+  
 };
 
 export default useFetchResult;
